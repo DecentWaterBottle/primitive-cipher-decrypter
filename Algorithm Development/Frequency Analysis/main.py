@@ -1,16 +1,68 @@
-# This is a sample Python script.
+import re
+from collections import OrderedDict
+letter_frequency_in_text = {"a": 0, "b": 0, "c": 0, "d": 0, "e": 0, "f": 0, "g": 0, "h": 0, "i": 0, "j": 0, "k": 0,
+                            "l": 0, "m": 0, "n": 0, "o": 0, "p": 0, "q": 0, "r": 0, "s": 0, "t": 0, "u": 0, "v": 0,
+                            "w": 0, "x": 0, "y": 0, "z": 0}
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+letter_frequency_mapping = {"a": "", "b": "", "c": "", "d": "", "e": "", "f": "", "g": "", "h": "", "i": "", "j": "",
+                            "k": "", "l": "", "m": "", "n": "", "o": "", "p": "", "q": "", "r": "", "s": "", "t": "",
+                            "u": "", "v": "", "w": "", "x": "", "y": "", "z": ""}
+
+actual_mapping = {"a": "k", "b": "x", "c": "v", "d": "m", "e": "c", "f": "y", "g": "o", "h": "p", "i": "h", "j": "q",
+                            "k": "r", "l": "s", "m": "z", "n": "f", "o": "i", "p": "j", "q": "a", "r": "d", "s": "l", "t": "e",
+                            "u": "g", "v": "w", "w": "b", "x": "u", "y": "n", "z": "t"}
+
+english_letter_frequencies = ["e", "t", "a", "o", "i", "n", "s", "r", "h", "d", "l",  "u", "c", "m", "f",
+                              "y", "w",  "g", "p", "b", "v", "k", "x", "q", "j", "z"]
+
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+key_string = ""
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def test_accuracy(calculated_mapping, actual_mapping):
+    total_correct = 0
+    for key, value in calculated_mapping.items():
+        print(f"Calculated Mapping Letter: {calculated_mapping[value]}. Actual Mapping Letter: {actual_mapping[value]}")
+        if calculated_mapping[value] == actual_mapping[value]:
+            total_correct += 1
+    return total_correct
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# Extract words
+f = open("../Test_Texts/Encrypted/encrypted_long_story.txt", "r", encoding="utf-8")
+words = " ".join(re.findall("[a-zA-Z]+", f.read())).lower()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+# Find frequency of letters
+for key, value in letter_frequency_in_text.items():
+    for letter in words:
+        if letter == key:
+            letter_frequency_in_text[key] += 1
+
+letter_frequency_in_text = sorted(letter_frequency_in_text.items(), key=lambda x: x[1], reverse=True)
+print("Letter Frequency: ", letter_frequency_in_text)
+
+
+# Map English letter frequencies to input letter frequencies
+for i in range(len(letter_frequency_in_text)):
+    print(
+        f"Letter: {letter_frequency_in_text[i]} being set to: {english_letter_frequencies[i]}")
+    letter_frequency_mapping[(letter_frequency_in_text[i][0])] = english_letter_frequencies[i]
+
+print(f"Complete Mapping: {letter_frequency_mapping}")
+
+
+for key, value in letter_frequency_mapping.items():
+    key_string += value
+
+print(key_string)
+print(alphabet)
+mapping = str.maketrans(alphabet, key_string)
+words = words.translate(mapping)
+
+print(words)
+print(f"Accuracy: {test_accuracy(letter_frequency_mapping, actual_mapping)}")
+print(actual_mapping)
+print(letter_frequency_mapping)
+
