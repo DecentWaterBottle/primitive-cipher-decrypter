@@ -1,5 +1,10 @@
-import re
-from collections import OrderedDict
+import re, sys, os
+
+current = os.path.dirname(os.path.realpath(__file__))
+parent_directory = os.path.dirname(current)
+sys.path.append(parent_directory)
+
+from Algorithm_Development.accuracy_test import test_accuracy
 letter_frequency_in_text = {"a": 0, "b": 0, "c": 0, "d": 0, "e": 0, "f": 0, "g": 0, "h": 0, "i": 0, "j": 0, "k": 0,
                             "l": 0, "m": 0, "n": 0, "o": 0, "p": 0, "q": 0, "r": 0, "s": 0, "t": 0, "u": 0, "v": 0,
                             "w": 0, "x": 0, "y": 0, "z": 0}
@@ -18,16 +23,6 @@ english_letter_frequencies = ["e", "t", "a", "o", "i", "n", "s", "r", "h", "d", 
 alphabet = "abcdefghijklmnopqrstuvwxyz"
 
 key_string = ""
-
-
-def test_accuracy(calculated_mapping, actual_mapping):
-    total_correct = 0
-    for key, value in calculated_mapping.items():
-        print(f"Calculated Mapping Letter: {calculated_mapping[value]}. Actual Mapping Letter: {actual_mapping[value]}")
-        if calculated_mapping[value] == actual_mapping[value]:
-            total_correct += 1
-    return total_correct
-
 
 # Extract words
 f = open("../Test_Texts/Encrypted/encrypted_long_story.txt", "r", encoding="utf-8")
@@ -62,7 +57,7 @@ mapping = str.maketrans(alphabet, key_string)
 words = words.translate(mapping)
 
 print(words)
-print(f"Accuracy: {test_accuracy(letter_frequency_mapping, actual_mapping)}")
+print(f"Accuracy: {test_accuracy(letter_frequency_mapping)}")
 print(actual_mapping)
 print(letter_frequency_mapping)
 
