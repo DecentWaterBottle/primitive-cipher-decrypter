@@ -39,7 +39,7 @@ def perform_frequency_analysis(words):
     return letter_frequency_mapping
 
 
-letter_frequency_mapping = perform_frequency_analysis("../Test_Texts/Encrypted/encrypted_long_story.txt")
+letter_frequency_mapping = perform_frequency_analysis("../Test_Texts/Encrypted/5000_story01_encrypted.txt")
 key_string = ""
 
 for key, value in letter_frequency_mapping.items():
