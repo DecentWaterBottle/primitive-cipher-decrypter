@@ -49,5 +49,6 @@ for i in range(len(accuracy_list)):
 plt.title("Frequency Analysis")
 plt.xlabel("Word Count")
 plt.ylabel("Accuracy")
+plt.ylim(0, 26)
 plt.plot(word_count, accuracy_list)
 plt.show()
