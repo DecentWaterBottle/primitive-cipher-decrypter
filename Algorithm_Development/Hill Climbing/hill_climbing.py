@@ -48,7 +48,7 @@ def shuffle_alphabet():
     return dict(zip(alphabet, shuffled_alphabet))
 
 
-def main():
+def hill_climbing(text):
     quadgrams = get_quadgrams()
     ciphertext = 'dj dk c qlxdwi wf sdgdu pcx. xlrlu kqcslkbdqk, kjxdhdet fxwz c bdiile rckl, bcgl pwe jbldx fdxkj ' \
                  'gdsjwxo ctcdekj jbl lgdu tcucsjds lzqdxl. iyxdet jbl rcjjul, xlrlu kqdlk zcectli jw kjlcu klsxlj ' \
@@ -56,7 +56,6 @@ def main():
                  'jw ilkjxwo ce lejdxl qucelj. qyxkyli ro jbl lzqdxl’k kdedkjlx ctlejk, qxdeslkk uldc xcslk bwzl ' \
                  'crwcxi blx kjcxkbdq, sykjwidce wf jbl kjwule qucek jbcj sce kcgl blx qlwqul cei xlkjwxl fxlliwz jw ' \
                  'jbl tcucvo… '
-
 
     counter = 0
     overall_best_score = 0
@@ -67,6 +66,7 @@ def main():
         best_score = find_score(decrypted_text, quadgrams)
         for i in range(2000):
             new_key = best_key.copy()
+            # a, b = random.sample("abcdefghijklmnopqrstuvwxyz", 2)
             a, b = random.sample("abcdefghijklmnopqrstuvwxyz", 2)
             new_key[a], new_key[b] = new_key[b], new_key[a]
 
@@ -86,10 +86,9 @@ def main():
     print(overall_best_key)
     print(overall_best_score)
     print(decrypt_text(ciphertext, overall_best_key))
+    return overall_best_key, overall_best_score
 
 
 
 # Star wars mapping: {'a': 'z', 'h': 'k', 't': 'g', 'f': 'f', 'e': 'n', 'n': 'j', 'g': 'v', 'v': 'x', 'y': 'u', 'c': 'a', 'r': 'b', 'i': 'd', 'u': 'l', 'd': 'i', 'q': 'p', 'o': 'y', 'p': 'w', 'x': 'r', 's': 'c', 'j': 't', 'z': 'm', 'k': 's', 'w': 'o', 'm': 'q', 'b': 'h', 'l': 'e'}
-
-main()
 
