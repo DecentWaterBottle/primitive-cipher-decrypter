@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<!-- Input for encrypted text -->
+<h1 class="text-2xl font-bold mb-4">Decrypter</h1>
+
+<form method="post" id="decrypt-form">
+    <div class="form-group">
+        <label for="decrypt-text">Enter text to decrypt:</label>
+        <textarea class="form-control" name="text_to_decrypt" id="decrypt-text" rows="6"></textarea>
+    </div>
+    <button id="submit-decrypt" class="btn btn-primary my-4" type="submit">Decrypt</button>
+</form>
+
+<!-- Output for encrypted text -->
+<div class="form-group">
+    <label for="decryption-output-text">Decrypted text:</label>
+    <textarea class="form-control" id="decryption-output-text" rows="6" readonly></textarea>
+</div>
+<script>
+    const decrypt_form = document.getElementById("decrypt-form");
+        console.log(decrypt_form);
+        decrypt_form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            const formData = new FormData(decrypt_form);
+            console.log(formData);
+            console.log(document.getElementById("decrypt-text").value);
+        })
+    // jQuery.noConflict();
+        if (typeof jQuery === 'undefined') {
+          console.log("jQuery is not loaded!");
+        } else {
+          console.log("jQuery is loaded!");
+        }
+
+    $(document).ready(function() {
+            $("#submit-decrypt").click(function() {
+                var data = {data: document.getElementById("decrypt-text").value}
+                $.ajax({
+                    type: "POST",
+                    url: "/decrypt-text",
+                    data: JSON.stringify(data),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(response) {
+                        console.log("Response from server: ");
+                        console.log(response);
+                        jQuery("#decryption-output-text").val(response.decrypted_text);
+                    },
+                });
+            });
+        });
+</script>
+{% endblock %}

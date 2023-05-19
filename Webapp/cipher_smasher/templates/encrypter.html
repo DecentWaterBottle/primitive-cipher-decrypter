@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<!-- Input for encrypted text -->
+<h1 class="text-2xl font-bold mb-4">Encrypter</h1>
+
+<form method="post" id="encrypt-form">
+    <div class="form-group">
+        <label for="encrypt-text">Enter text to encrypt:</label>
+        <textarea class="form-control" name="text_to_encrypt" id="encrypt-text" rows="6"></textarea>
+        <label for="encrypt-alphabet">Alphabet to use:</label>
+        <input class="mt-4" type="text" id="encrypt-alphabet" value="qwertyuiopasdfghjklzxcvbnm" size="30">
+    </div>
+    <button id="submit-encrypt" class="btn btn-primary mb-4" type="submit">Encrypt</button>
+</form>
+
+<!-- Output for encrypted text -->
+<div class="form-group">
+    <label for="encryption-output-text">Encrypted text:</label>
+    <textarea class="form-control" id="encryption-output-text" rows="6" readonly></textarea>
+</div>
+<script>
+     const encrypt_form = document.getElementById("encrypt-form");
+        encrypt_form.addEventListener("submit", function(event) {
+            event.preventDefault();
+        })
+
+     jQuery.noConflict();
+        if (typeof jQuery === 'undefined') {
+          console.log("jQuery is not loaded!");
+        } else {
+          console.log("jQuery is loaded!");
+        }
+     jQuery(document).ready(function() {
+            jQuery("#submit-encrypt").click(function(event) {
+            console.log("Encrypting...");
+
+                var data = {
+                    text: document.getElementById("encrypt-text").value,
+                    alphabet: document.getElementById("encrypt-alphabet").value,
+                }
+                console.log(data);
+                jQuery.ajax({
+                    type: "POST",
+                    url: "/encrypt-text",
+                    data: JSON.stringify(data),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(response) {
+                        console.log("Response from server: ");
+                        console.log(response);
+                        jQuery("#encryption-output-text").val(response.encrypted_text);
+                    },
+                });
+            });
+        });
+</script>
+{% endblock %}
