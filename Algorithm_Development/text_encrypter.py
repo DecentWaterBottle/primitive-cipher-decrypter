@@ -1,14 +1,14 @@
 
 text_to_encrypt = input("Text: ")
-# Key for characters text_1
+# Key for characters text_1.txt.txt.txt.txt.txt.txt.txt.txt
 # key = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm"
-# Key for characters text_2
+# Key for characters text_2.txt.txt.txt.txt.txt.txt.txt.txt
 # key = "KXVMCNOPHQRSZYIJADLEGWBUFTkxvmcnophqrszyijadlegwbuft"
-# Key for characters text_3
+# Key for characters text_3.txt.txt.txt.txt.txt.txt.txt.txt
 # key = "EBFASWLYGQTZOHDKUCPRNXIVMJebfaswlygqtzohdkucprnxivmj"
-# Key for characters text_4
+# Key for characters text_4.txt.txt.txt.txt.txt.txt.txt.txt
 # key = "HMFTKQDERYZJBGPUAWOSNXICVLhmftkqderyzjbgpuawosnxicvl"
-# Key for characters text_5
+# Key for characters text_5.txt.txt.txt.txt.txt.txt.txt.txt
 key = "CTLSXAHGBPREQJUMKOWVIFDYZNctlsxahgbpreqjumkowvifdyzn"
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
