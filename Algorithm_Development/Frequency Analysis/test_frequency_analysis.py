@@ -6,11 +6,14 @@ from matplotlib import pyplot as plt
 current = os.path.dirname(os.path.realpath(__file__))
 parent_directory = os.path.dirname(current)
 sys.path.append(parent_directory)
-from Algorithm_Development.accuracy_test import test_accuracy
-import matplotlib as mpl
-mpl.use('TkAgg')
+from Algorithm_Development.accuracy_test import test_accuracy_with_custom_mapping
 
-
+actual_mapping = {"a": "q", "b": "w", "c": "e", "d": "r", "e": "t", "f": "y", "g": "u", "h": "i", "i": "o",
+                      "j": "p",
+                      "k": "a", "l": "s", "m": "d", "n": "f", "o": "g", "p": "h", "q": "j", "r": "k", "s": "l",
+                      "t": "z",
+                      "u": "x", "v": "c", "w": "v", "x": "b", "y": "n", "z": "m"}
+actual_mapping = {v: k for k, v in actual_mapping.items()}
 alphabet = "abcdefghijklmnopqrstuvwxyz"
 word_count = []
 accuracy_list = []
@@ -29,7 +32,7 @@ for file in test_files:
     words = " ".join(re.findall("[a-zA-Z]+", f.read())).lower()
     word_count.append(len(words.split(" ")))
     letter_frequency_mapping = perform_frequency_analysis(words)
-    accuracy_list.append(test_accuracy(letter_frequency_mapping))
+    accuracy_list.append(test_accuracy_with_custom_mapping(letter_frequency_mapping, actual_mapping))
 
     for key, value in letter_frequency_mapping.items():
         key_string += value
