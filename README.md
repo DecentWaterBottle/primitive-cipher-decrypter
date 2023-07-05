@@ -13,3 +13,7 @@ By using the hill-climbing algorithm, we are to iteratively search for the most 
 
 ## Algorithm Effectiveness
 In addition to the practical implementation, the project also includes a section to thouroughly test and assess the accuracy of the decryption process for varying lengths of texts. A brute-force frequency analysis approach is used as a baseline to test against. 
+
+![Hill-climbing algorithm accuracy](https://github.com/DecentWaterBottle/primitive-cipher-decrypter/blob/master/images/hill-climbing-quadgram-accuracy.png)
+
+![Frequency-analysis algorithm accuracy](https://github.com/DecentWaterBottle/primitive-cipher-decrypter/blob/master/images/frequency-analysis-quadgram-accuracy.png)
